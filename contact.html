@@ -61,7 +61,7 @@
         <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-600">Feel free to contact me.</p>
       </div>
       <div class="lg:w-1/2 md:w-2/3 mx-auto">
-        <form action="process_form.php" method="post">
+        <form id="contact-form" action="process_form.php" method="post">
           <div class="flex flex-wrap -m-2">
             <div class="p-2 w-full">
               <div class="relative">
@@ -89,6 +89,11 @@
             </div>
           </div>
         </form>
+        <div id="thank-you-message" style="display: none;">
+          <h2>Thank you for contacting me!</h2>
+          <p>I'll get back to you soon.</p>
+        </div>
+        
         <div class="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
           <a class="text-indigo-500 footer-link">anupacharya140@email.com</a>
           <p class="leading-normal my-5 text-gray-800">5201 University Blvd<br>Laredo, TX 78041</p>
@@ -113,7 +118,26 @@
           </span>
         </div>
       </section>
-        
+      <script>
+        // Get the form and thank you message elements
+        const form = document.getElementById('contact-form');
+        const thankYouMessage = document.getElementById('thank-you-message');
+      
+        // Add an event listener to the form submission
+        form.addEventListener('submit', (e) => {
+          e.preventDefault(); // Prevent the default form submission behavior
+      
+          // Send the form data to process_form.php using AJAX
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', 'process_form.php', true);
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          xhr.send(new FormData(form));
+      
+          // Update the HTML content to display the thank you message
+          thankYouMessage.style.display = 'block';
+          form.style.display = 'none';
+        });
+      </script>
 
       <footer class="text-gray-500 body-font bg-gray-800">
         <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
